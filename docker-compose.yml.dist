@@ -1,0 +1,10 @@
+version: "2.4"
+services:
+  worker:
+    build: .
+    env_file: env
+    volumes:
+    - .:/var/app
+networks:
+  default:
+    name: my-docker-lan
