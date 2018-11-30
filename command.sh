@@ -11,6 +11,11 @@ echo
 echo "Uncompressing dump..."
 date
 gunzip -c "$FILE_DUMP_COMPRESSED" > "$FILE_DUMP"
+rm -rf "$FILE_DUMP_COMPRESSED"
+
+echo
+echo "Removing DEFINER= strings from dump to avoid SPECIAL PRIVILEGES error..."
+sed -i 's/DEFINER=[^[:space:]]\+//g' "$FILE_DUMP"
 
 echo
 echo 'Dropping old database...'
@@ -37,7 +42,6 @@ fi
 echo
 echo 'Removing dump file...'
 date
-rm -rf "$FILE_DUMP_COMPRESSED"
 rm -rf "$FILE_DUMP"
 
 echo 'Done!'
