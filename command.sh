@@ -20,12 +20,12 @@ sed -i 's/DEFINER=[^[:space:]]\+//g' "$FILE_DUMP"
 echo
 echo 'Dropping old database...'
 date
-mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASS}" -e "DROP DATABASE IF EXISTS ${DB_NAME}";
+mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASS}" -e "DROP DATABASE IF EXISTS \\\`${DB_NAME}\\\`";
 
 echo
 echo 'Creating fresh database...'
 date
-mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASS}" -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME} COLLATE 'utf8_general_ci'";
+mysql -h"${DB_HOST}" -u"${DB_USER}" -p"${DB_PASS}" -e "CREATE DATABASE IF NOT EXISTS \\\`${DB_NAME}\\\` COLLATE 'utf8_general_ci'";
 
 echo
 echo 'Importing dump into database...'
